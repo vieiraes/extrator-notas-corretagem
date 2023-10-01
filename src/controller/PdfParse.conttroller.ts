@@ -14,39 +14,31 @@ router.post('/pdf-parse', (req: Request, res: Response) => {
     let dataBuffer = fs.readFileSync(path);
     pdfParse(dataBuffer).then(function (data) {
 
-        // number of pages
-        // console.log(data.numpages);
-        // number of rendered pages
-        // console.log(data.numrender);
-        // // PDF info
-        // console.log(data.info);
-        // // PDF metadata
-        // console.log(data.metadata);
-        // // PDF.js version
-        // // check https://mozilla.github.io/pdf.js/getting_started/
-        // console.log(data.version);
-        // // PDF text
         console.log(data.text)
 
-        const responseArray = data.text.split('\n')
+        const arrayInteiro = data.text.split('\n')
+
+        let stringAlvo = "NOTA DE NEGOCIAÇÃO"
 
 
-        const numeroNota = responseArray.slice(8, 9)
-        const dataPregao = responseArray.slice(12, 13)
-        const corretora = responseArray.slice(13, 14)
+        function splitArray(array, stringAlvo) {
+
+            let indiceSTringAlvo = array.indexOf(stringAlvo)
+
+            let arrayAntes = array.slice(0, indiceSTringAlvo)
+            let arrayDepois = array.slice(indiceSTringAlvo + 1)
+
+            return { arrayAntes, arrayDepois }
+        }
+
+        const resultado = splitArray(arrayInteiro, stringAlvo)
 
         res.send({
-            numeroNota,
-            corretora,
-            dataPregao,
-            raw: responseArray,
+            resultado,
+            raw: arrayInteiro,
         },
         )
     });
-
-
-
-
 })
 
 
