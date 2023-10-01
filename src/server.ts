@@ -1,6 +1,6 @@
 import express from 'express'
 require('dotenv').config()
-import { ExtractController } from './controller'
+import { ExtractController, PdfParse } from './controller'
 
 const app = express()
 const router = express.Router()
@@ -19,7 +19,8 @@ function bootstrap() {
     }
 }
 
-app.use('/extract', ExtractController)
+app.use('/extract', ExtractController )
+app.use('/pdf', PdfParse)
 
 
 bootstrap()

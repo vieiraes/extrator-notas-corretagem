@@ -1,21 +1,7 @@
 import express from 'express'
 import { Request, Response } from 'express'
 import fs from 'fs/promises'
-import { pdfToText, pdfToPages } from 'pdf-ts'
-
-
-///
-
-
-// const pdf = await fs.readFile('./path/to/file.pdf');
-// const text = await pdfToText(pdf);
-// console.log(text);
-
-
-
-///
-
-
+import { pdfToPages } from 'pdf-ts'
 
 
 const router = express.Router()
@@ -30,16 +16,7 @@ router.post('/pdf', (req: Request, res: Response) => {
         return text
     }
 
-    extract(path)
-        .then((data) => {
-
-            const formatado = JSON.stringify(data)
-            
-            
-            JSON.stringify(JSON.parse(formatado))
-
-            res.send({ formatado })
-        })
+     extract(path)
 
 })
 
