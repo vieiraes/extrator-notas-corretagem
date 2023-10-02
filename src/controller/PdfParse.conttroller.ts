@@ -34,7 +34,7 @@ router.post('/pdf-parse', (req: Request, res: Response) => {
         const resultado = splitArray(arrayInteiro, stringAlvo)
 
         res.send({
-            resultado,
+            
             raw: arrayInteiro,
         },
         )
